@@ -563,11 +563,12 @@ class Job(JenkinsBase, MutableJenkinsThing):
             }
         """
         for action in self._data['actions']:
-            try:
-                for param in action['parameterDefinitions']:
-                    yield param
-            except KeyError:
-                continue
+            if action:
+                try:
+                    for param in action['parameterDefinitions']:
+                        yield param
+                except KeyError:
+                    continue
 
     def get_params_list(self):
         """
