@@ -27,7 +27,7 @@ class JenkinsBase(object):
         Initialize a jenkins connection
         """
         self._data = None
-        self.baseurl = self.strip_trailing_slash(baseurl)
+        self.baseurl = baseurl
         if poll:
             self.poll()
 
@@ -43,12 +43,6 @@ class JenkinsBase(object):
         if not other.baseurl == self.baseurl:
             return False
         return True
-
-    @classmethod
-    def strip_trailing_slash(cls, url):
-        while url.endswith('/'):
-            url = url[:-1]
-        return url
 
     def poll(self):
         self._data = self._poll()
